@@ -965,6 +965,21 @@ class Asana
     }
 
     /**
+     * Removes a follower from a task. If successful, will return success and an empty data block.
+     *
+     * @param string $taskId
+     * @param string $followerId
+     * @return string JSON or null
+     */
+    public function removeFollowerFromTask($taskId, $followerId)
+    {
+        $data = array('data' => array('followers' => $followerId));
+        $data = json_encode($data);
+
+        return $this->askAsana($this->taskUrl . '/' . $taskId . '/removeFollowers', $data, ASANA_METHOD_POST);
+    }
+
+    /**
      * This function communicates with Asana REST API.
      * You don't need to call this function directly. It's only for inner class working.
      *
